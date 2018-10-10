@@ -5,6 +5,7 @@
  */
 package logica;
 
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,10 +20,20 @@ public class Buscaminas {
     public static void main(String[] args) {
         Tablero prueba = new Tablero(9,9,10);
         prueba.imprimirTablero();
-        int i = Integer.parseInt(JOptionPane.showInputDialog("ingrese una fila"));
-        int j = Integer.parseInt(JOptionPane.showInputDialog("ingrese una columna"));
-        prueba.descubrirCasilla(i, j);
-        prueba.imprimirTablero();
+        while(!prueba.isFinalizado()){
+            String[] opciones = {"descubrir", "bandera"};
+            int opcion = JOptionPane.showOptionDialog(null, "ingrese una opcion:", "Hacer jugada", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+                    null, opciones, opciones[0]);
+            int i = Integer.parseInt(JOptionPane.showInputDialog("ingrese una fila"));
+            int j = Integer.parseInt(JOptionPane.showInputDialog("ingrese una columna"));
+            if(opcion == 0){
+                prueba.descubrirCasilla(i, j);
+            }else{
+                prueba.ponerBandera(i, j);
+            }
+            prueba.imprimirTablero();
+        }
+        
         
         
         
